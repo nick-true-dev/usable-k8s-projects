@@ -1,0 +1,13 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: cluster-ingress
+spec:
+  rules:
+  - host: files.mysite.test
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nextcloud-server
+          servicePort: 80
