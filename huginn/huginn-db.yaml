@@ -43,3 +43,16 @@ spec:
       - name: db-storage
         persistentVolumeClaim:
           claimName: huginn-storage-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: huginn-db
+  labels:
+    app: huginn
+spec:
+  selector:
+    pod-label: huginn-db-pod
+  ports:
+  - protocol: TCP
+    port: 5432
