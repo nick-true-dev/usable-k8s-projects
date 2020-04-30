@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: huginn-server
+  labels:
+    app: huginn
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod-label: huginn-server-pod
+  template:
+    metadata:
+      labels:
+        pod-label: huginn-server-pod
+    spec:
+      containers:
+      - name: huginn
+        image: huginn/huginn:b915466f432a275fa1fd4f599650ea7f3009fd8f
