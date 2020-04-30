@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: huginn-db
+  labels:
+    app: huginn
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod-label: huginn-db-pod
+  template:
+    metadata:
+      labels:
+        pod-label: huginn-db-pod
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:12
