@@ -30,6 +30,12 @@ spec:
       containers:
       - name: postgres
         image: postgres:12
+        env:
+        - name: POSTGRES_DB
+          value: huginn
+        envFrom:
+        - secretRef:
+            name: huginn-db-secret
         volumeMounts:
         - name: db-storage
           mountPath: /var/lib/postgresql/data
