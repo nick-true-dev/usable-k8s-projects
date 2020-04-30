@@ -17,3 +17,10 @@ spec:
       containers:
       - name: postgres
         image: postgres:12
+        volumeMounts:
+        - name: db-storage
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: db-storage
+        persistentVolumeClaim:
+          claimName: huginn-storage-claim
