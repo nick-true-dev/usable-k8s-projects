@@ -1,3 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: huginn-server-env-vars
+  labels:
+    app: huginn
+data:
+  DATABASE_ADAPTER: postgresql
+  DATABASE_HOST: huginn-db
+  DATABASE_PORT: "5432"
+  INVITATION_CODE: some_invite_code
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
