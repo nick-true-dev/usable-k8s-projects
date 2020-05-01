@@ -29,3 +29,7 @@ spec:
       containers:
       - name: huginn
         image: huginn/huginn:b915466f432a275fa1fd4f599650ea7f3009fd8f
+        envFrom:
+        - configMapRef:
+            name: huginn-server-env-vars
+
