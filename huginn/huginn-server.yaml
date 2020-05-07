@@ -9,6 +9,13 @@ data:
   DATABASE_HOST: huginn-db
   DATABASE_PORT: "5432"
   INVITATION_CODE: some_invite_code
+  SMTP_DOMAIN: amazonaws.com
+  SMTP_SERVER: TODO
+  SMTP_PORT: "587"
+  SMTP_AUTHENTICATION: plain
+  SMTP_ENABLE_STARTTLS_AUTO: "true"
+  SEND_EMAIL_IN_DEVELOPMENT: "true"
+  EMAIL_FROM_ADDRESS: TODO
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -32,4 +39,18 @@ spec:
         envFrom:
         - configMapRef:
             name: huginn-server-env-vars
-
+        - secretRef:
+            name: huginn-server-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: huginn-server
+  labels:
+    app: huginn
+spec:
+  selector:
+    pod-label: huginn-server-pod
+  ports:
+  - protocol: TCP
+    port: 3000
