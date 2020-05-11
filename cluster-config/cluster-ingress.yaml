@@ -11,3 +11,10 @@ spec:
         backend:
           serviceName: nextcloud-server
           servicePort: 80
+  - host: agents.mysite.test
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: huginn-server
+          servicePort: 3000
