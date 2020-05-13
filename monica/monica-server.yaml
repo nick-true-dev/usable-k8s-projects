@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monica-server
+  labels:
+    app: monica
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod-label: monica-server-pod
+  template:
+    metadata:
+      labels:
+        pod-label: monica-server-pod
+    spec:
+      containers:
+      - name: monica
+        image: monicahq/monicahq:v2.17.0-php-apache
