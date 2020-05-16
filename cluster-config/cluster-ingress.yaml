@@ -3,6 +3,12 @@ kind: Ingress
 metadata:
   name: cluster-ingress
 spec:
+  tls:
+  - hosts:
+    - crm.mysite.test
+    - agents.mysite.test
+    - files.mysite.test
+    secretName: my-tls-secret
   rules:
   - host: files.mysite.test
     http:

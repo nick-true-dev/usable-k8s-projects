@@ -5,7 +5,8 @@ metadata:
   labels:
     app: monica
 data:
-  APP_ENV: local
+  APP_ENV: production
+  APP_TRUSTED_PROXIES: "*"
   APP_DEBUG: "true"
   APP_DISABLE_SIGNUP: "true"
   APP_URL: https://localhost
