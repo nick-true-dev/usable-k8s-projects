@@ -1,3 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: monica-server-env-vars
+  labels:
+    app: monica
+data:
+  APP_ENV: local
+  APP_DEBUG: "true"
+  APP_DISABLE_SIGNUP: "true"
+  APP_URL: https://localhost
+  DB_HOST: monica-db
+  DB_PORT: "3306"
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,3 +31,29 @@ spec:
       containers:
       - name: monica
         image: monicahq/monicahq:v2.17.0-php-apache
+        envFrom:
+        - configMapRef:
+            name: monica-server-env-vars
+        - secretRef:
+            name: monica-server-secret
+        volumeMounts:
+        - name: server-storage
+          mountPath: /var/www/monica/storage
+          subPath: server-data
+      volumes:
+      - name: server-storage
+        persistentVolumeClaim:
+          claimName: monica-shared-storage-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: monica-server
+  labels:
+    app: monica
+spec:
+  selector:
+    pod-label: monica-server-pod
+  ports:
+  - protocol: TCP
+    port: 80
